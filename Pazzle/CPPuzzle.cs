@@ -32,14 +32,19 @@ namespace Puzzle
                 _selectedIndices.Add(new int[] { input[0], input[1] });
                 _selectionCount++;
 
-                if (_answerSeq.SequenceEqual(_puzzleEngine.GetCurrentAnswerSequence()))
-                {
-                    Console.WriteLine("You win!");
-                }
-                else if (_selectionCount == _answerSeq.Length)
-                {
-                    Console.WriteLine("You lost!");
-                }
+                ShowWinner();
+            }
+        }
+
+        public void ShowWinner()
+        {
+            if (_answerSeq.SequenceEqual(_puzzleEngine.GetCurrentAnswerSequence()))
+            {
+                Console.WriteLine("You win!");
+            }
+            else if (_selectionCount == _answerSeq.Length)
+            {
+                Console.WriteLine("You lost!");
             }
         }
 
@@ -68,7 +73,7 @@ namespace Puzzle
         }
         public void PrintTargetSeq()
         {
-            Console.WriteLine($"Target sequence: [{String.Join(", ", _answerSeq)}]");
+            Console.WriteLine($"Target sequence: [{string.Join(", ", _answerSeq)}]");
         }
     }
 }

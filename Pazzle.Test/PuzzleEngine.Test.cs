@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Puzzle;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Pazzle.Test
@@ -87,6 +88,34 @@ namespace Pazzle.Test
             }
 
             Assert.AreEqual(2, selectionTimes);
+        }
+
+        [TestMethod]
+        public void ShuffleMethodShouldReturnSameArrayWithDiffIndices()
+        {
+            //Arrange
+            var arr = (string[])sampleArray[0].OrderBy(x => x).ToArray().Clone();
+
+            //Act
+            var result = arr.ShaffleArray();
+
+            //Assert
+            bool isArrIndicesDiff = false;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] != result[i])
+                {
+                    isArrIndicesDiff = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(isArrIndicesDiff);
+
+            var sortedResult = result.OrderBy(x => x).ToArray();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Assert.AreEqual(arr[i], sortedResult[i]);
+            }
         }
     }
 }

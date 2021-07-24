@@ -15,8 +15,9 @@ namespace Pazzle
                 new string[]{ "F7", "55", "B1", "1C", "E9" },
                 new string[]{ "E9", "B1", "55", "1C", "1C" }
             };
+            string[][] generatedArray = new CPPuzzleMatrixGenerator(5, 5).GenerateMatrix();
             string[] answerArray = new string[] { "1C", "55", "B1", "1C" };
-            CPPuzzle puzzle = new CPPuzzle(sampleArray, answerArray);
+            CPPuzzle puzzle = new CPPuzzle(generatedArray, answerArray);
             puzzle.RunPuzzle();
         }
     }

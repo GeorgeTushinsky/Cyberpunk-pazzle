@@ -23,13 +23,18 @@ namespace Puzzle
         {
             while (_selectionCount < _answerSeq.Length)
             {
-                Console.Clear();
-                PrintMatrix();
-                PrintTargetSeq();
-                int[] input = Console.ReadLine().Split(",").Select(int.Parse).ToArray();
+                string input = "";
+                while (input == "")
+                {
+                    Console.Clear();
+                    PrintMatrix();
+                    PrintTargetSeq();
+                    input = Console.ReadLine();
+                }
+                int[] parseInput = input.Split(",").Select(int.Parse).ToArray();
 
-                _puzzleEngine.Select(input[0], input[1]);
-                _selectedIndices.Add(new int[] { input[0], input[1] });
+                _puzzleEngine.Select(parseInput[0], parseInput[1]);
+                _selectedIndices.Add(new int[] { parseInput[0], parseInput[1] });
                 _selectionCount++;
 
                 ShowWinner();
@@ -58,10 +63,10 @@ namespace Puzzle
                 {
                     if (answerIndex < _selectedIndices.Count && i == _selectedIndices[answerIndex][0] && j == _selectedIndices[answerIndex][1])
                     {
-                        answerIndex++;
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(_puzzleEngine.PuzzleMatrix[i][j]);
                         Console.ForegroundColor = ConsoleColor.White;
+                        answerIndex++;
                     }
                     else Console.Write(_puzzleEngine.PuzzleMatrix[i][j]);
 
